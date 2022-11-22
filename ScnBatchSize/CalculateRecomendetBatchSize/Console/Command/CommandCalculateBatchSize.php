@@ -8,27 +8,21 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Command\Command;
+use Magento\Framework\DB\Adapter\AdapterInterface;
+use Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface;
 
 class CommandCalculateBatchSize extends Command
 {
 //    private const INDEX_NAME = 'index:name';
     public const COMMAND_NAME = 'calculate:batch:size';
 
-//    /**
-//     * @var \Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface
-//     */
-//    private $rowSizeEstimator;
-
-//    /**
-//     * CompositeProductBatchSizeCalculator constructor.
-//     * @param \Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface $rowSizeEstimator
-//     */
-//    public function __construct(
-//        \Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface $rowSizeEstimator,
-//    ) {
-//        $this->rowSizeEstimator = $rowSizeEstimator;
-//        parent::__construct();
-//    }
+    public function __construct(
+         private readonly IndexTableRowSizeEstimatorInterface $rowSizeEstimator,
+         private readonly AdapterInterface $connection,
+         string $name = null,
+    ) {
+        parent::__construct($name);
+    }
 
     protected function configure(): void
     {
@@ -59,18 +53,21 @@ class CommandCalculateBatchSize extends Command
 //        $a = $input;
 //        $b = $output;
 //
-//        $rowMemory = $this->rowSizeEstimator->estimateRowSize();
+//        /** @var \Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface $rowSizeEstimator*/
+        $rowMemory = $this->rowSizeEstimator->estimateRowSize();
 //        /**@var \Magento\Framework\DB\Adapter\AdapterInterface $connection */
-//        $bufferPoolSize = $connection->fetchOne('SELECT @@innodb_buffer_pool_size;');
-//
+        $bufferPoolSize = $this->connection->fetchOne('SELECT @@innodb_buffer_pool_size;');
+
 //        $batchSize = (($bufferPoolSize * 0.2)/$rowMemory)*0.95;
-//
-//        echo sprintf("Command %s work, recommended batchSize=%s for index %s  \n",
-//            self::COMMAND_NAME, self::INDEX_NAME, $batchSize);
+
+//        echo sprintf("Command %s work, recommended batchSize=%s for index ?? \n",
+//            self::COMMAND_NAME, $batchSize);
 //        exit();
 
         echo sprintf("Command %s work, recomendet batchSize=  \n",
             self::COMMAND_NAME);
         exit();
+//        echo sprintf("Command %s work, recommended batchSize=%s for index %s  \n",
+//            self::COMMAND_NAME, self::INDEX_NAME, $batchSize);
     }
 }
