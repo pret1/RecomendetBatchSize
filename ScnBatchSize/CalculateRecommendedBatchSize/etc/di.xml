@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="scn_create_sitemap" xsi:type="object">ScnBatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="ScnBatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize">
+        <arguments>
+<!--            <argument name="rowSizeEstimator" xsi:type="object">Magento\Catalog\Model\Indexer\Category\Product\RowSizeEstimator</argument>-->
+<!--            <argument name="connection" xsi:type="object">Zend_Db_Adapter_Pdo_Mysql</argument>-->
+<!--            <argument name="connection" xsi:type="object">Magento\Framework\DB\Adapter\Pdo\Mysql</argument>-->
+        </arguments>
+    </type>
+    <type name="ScnBatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize">
+        <arguments>
+            <argument name="rowSizeEstimator" xsi:type="object">Magento\Catalog\Model\Indexer\Category\Product\RowSizeEstimator</argument>
+<!--            <argument name="connection" xsi:type="object">Zend_Db_Adapter_Pdo_Mysql</argument>-->
+            <argument name="connection" xsi:type="object">Magento\Framework\DB\Adapter\Pdo\Mysql</argument>
+        </arguments>
+    </type>
+</config>
