@@ -10,7 +10,10 @@
     </type>
     <type name="ScnBatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize">
         <arguments>
-            <argument name="rowSizeEstimator" xsi:type="object">Magento\Catalog\Model\Indexer\Category\Product\RowSizeEstimator</argument>
+            <argument name="rowSizeEstimator6" xsi:type="object">Magento\Catalog\Model\Indexer\Category\Product\RowSizeEstimator</argument>
+            <argument name="rowSizeEstimator5" xsi:type="object">Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\IndexTableRowSizeEstimator</argument>
+            <argument name="rowSizeEstimator3" xsi:type="object">Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\SourceRowSizeEstimator</argument>
+            <argument name="rowSizeEstimator1" xsi:type="object">Magento\Catalog\Model\Indexer\Category\Product\RowSizeEstimator</argument>
             <argument name="resourceConnection" xsi:type="object">Magento\Framework\App\ResourceConnection</argument>
 <!--            <argument name="connection" xsi:type="object">Zend_Db_Adapter_Pdo_Mysql</argument>-->
 <!--            <argument name="connection" xsi:type="object">Magento\Framework\DB\Adapter\Pdo\Mysql</argument>-->
