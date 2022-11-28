@@ -5,30 +5,37 @@ declare(strict_types=1);
 namespace ScnBatchSize\CalculateRecommendedBatchSize\Model;
 
 use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface;
+use ScnBatchSize\CalculateRecommendedBatchSize\Model\TypeRowSizeEstimator;
 
 class CalculateBatchSize
 {
-    private ResourceConnection $resourceConnection;
-
     /**
-     * @var IndexTableRowSizeEstimatorInterface[]
+     * @param ResourceConnection $resourceConnection
+     * @param array $rowSizeEstimatorPool
      */
-    private array $rowSizeEstimatorPool;
-
     public function __construct(
-        ResourceConnection $resourceConnection,
-        array $rowSizeEstimatorPool = [],
+        private readonly ResourceConnection $resourceConnection,
+        private readonly TypeRowSizeEstimator $typeRowSizeEstimator,
+        private readonly array $rowSizeEstimatorPool = [],
     ) {
-        $this->resourceConnection = $resourceConnection;
-        $this->rowSizeEstimatorPool = $rowSizeEstimatorPool;
     }
 
+    /**
+     * @return void
+     */
     public function execute(): void
     {
         $connection = $this->resourceConnection->getConnection();
 
         foreach ($this->rowSizeEstimatorPool as $nameIndex => $rowSizeEstimator) {
+            $this->typeRowSizeEstimator->checkTypeRowSizeEstimator($rowSizeEstimator);
+//            if(!($rowSizeEstimator instanceof IndexTableRowSizeEstimatorInterface)){
+//                throw new LocalizedException(
+//                    __("%1 doesn't extends Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface", get_class($rowSizeEstimator))
+//                );
+//            }
             $rowMemory = $rowSizeEstimator->estimateRowSize();
             $bufferPoolSize = $connection->fetchOne('SELECT @@innodb_buffer_pool_size;');
             $batchSize = ceil((($bufferPoolSize * 0.2) / $rowMemory) * 0.95);
