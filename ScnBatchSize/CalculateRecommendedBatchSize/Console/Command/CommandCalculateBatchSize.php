@@ -8,13 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Command\Command;
-//use \Magento\Indexer\Console\Command\AbstractIndexerManageCommand;
-use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface;
-//use Magento\Catalog\Model\Indexer\Category\Product\RowSizeEstimator;
-//use Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\SourceRowSizeEstimator;
-//use Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\IndexTableRowSizeEstimator;
-//use ScnBatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize;
 use Magento\Framework\App\ResourceConnection;
 
 class CommandCalculateBatchSize extends Command
@@ -29,11 +23,6 @@ class CommandCalculateBatchSize extends Command
     private array $rowSizeEstimatorPool;
 
     public function __construct(
-//        private readonly IndexTableRowSizeEstimatorInterface $rowSizeEstimator6,
-//        private readonly IndexTableRowSizeEstimatorInterface $rowSizeEstimator1,
-//        private readonly IndexTableRowSizeEstimatorInterface $rowSizeEstimator3,
-//        private readonly IndexTableRowSizeEstimatorInterface $rowSizeEstimator5,
-        //        private readonly CalculateBatchSize $connectionForCalculateBatchSize,
         ResourceConnection $resourceConnection,
         array $rowSizeEstimatorPool = [],
         string $name = null,
@@ -63,13 +52,6 @@ class CommandCalculateBatchSize extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $connection = $this->resourceConnection->getConnection();
-//        $arrayIndexes = [
-//            "catalog_category_product"  => $this->rowSizeEstimator1,
-//            "catalog_product_category"  => $this->rowSizeEstimator1,
-//            "catalog_product_attribute" => $this->rowSizeEstimator3,
-//            "catalog_product_price"     => $this->rowSizeEstimator5,
-//            "cataloginventory_stock"    => $this->rowSizeEstimator6,
-//        ];
 
         foreach ($this->rowSizeEstimatorPool as $nameIndex => $rowSizeEstimator) {
             $rowMemory = $rowSizeEstimator->estimateRowSize();
