@@ -13,7 +13,7 @@ use ScnBatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize;
 class CommandCalculateBatchSize extends Command
 {
     public const COMMAND_NAME = 'calculate:batch:size';
-    private const  INSURANCE_COEFFICIENT = 'coefficient';
+    private const INSURANCE_COEFFICIENT = 'coefficient';
 
     /**
      * @param CalculateBatchSize $calculateBatchSize
@@ -48,7 +48,8 @@ class CommandCalculateBatchSize extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $coefficient = $input->getOptions()['coefficient'];
-        $this->calculateBatchSize->execute($coefficient);
+        $coefficient = $input->getOption('coefficient');
+        $coefficient = $coefficient ?? 0.95;
+        $this->calculateBatchSize->execute((float) $coefficient);
     }
 }

@@ -27,16 +27,15 @@ class CalculateBatchSize
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function execute($coefficient): void
+    public function execute(float $coefficient): void
     {
-        $coefficient = $coefficient ?? 0.95;
         $connection = $this->resourceConnection->getConnection();
 
         foreach ($this->rowSizeEstimatorPool as $nameIndex => $rowSizeEstimator) {
             $this->typeRowSizeEstimator->checkTypeRowSizeEstimator($rowSizeEstimator);
             $rowMemory = $rowSizeEstimator->estimateRowSize();
             $bufferPoolSize = $connection->fetchOne('SELECT @@innodb_buffer_pool_size;');
-            $batchSize = ceil((($bufferPoolSize * 0.2) / $rowMemory) * (float)$coefficient);
+            $batchSize = ceil((($bufferPoolSize * 0.2) / $rowMemory) * $coefficient);
             echo sprintf(
                 "Recommended batchSize=%s for index %s \n",
                 $batchSize,

@@ -18,7 +18,7 @@ class TypeRowSizeEstimator
     {
         if(!($rowSizeEstimator instanceof IndexTableRowSizeEstimatorInterface)){
             throw new LocalizedException(
-                __("%1 doesn't extends Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface", get_class($rowSizeEstimator))
+                __("%1 doesn't extend Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface", get_class($rowSizeEstimator))
             );
         }
     }
