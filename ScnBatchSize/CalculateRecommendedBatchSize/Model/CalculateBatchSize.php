@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace ScnBatchSize\CalculateRecommendedBatchSize\Model;
 
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface;
-use ScnBatchSize\CalculateRecommendedBatchSize\Model\TypeRowSizeEstimator;
+use ScnBatchSize\CalculateRecommendedBatchSize\Model\RowSizeEstimatorPool;
 
 class CalculateBatchSize
 {
     /**
      * @param ResourceConnection $resourceConnection
-     * @param TypeRowSizeEstimator $typeRowSizeEstimator
-     * @param array $rowSizeEstimatorPool
+     * @param RowSizeEstimatorPool $rowSizeEstimatorPool
      */
     public function __construct(
         private readonly ResourceConnection $resourceConnection,
-        private readonly TypeRowSizeEstimator $typeRowSizeEstimator,
-        private readonly array $rowSizeEstimatorPool = [],
+        private readonly RowSizeEstimatorPool $rowSizeEstimatorPool,
     ) {
     }
 
@@ -31,8 +28,7 @@ class CalculateBatchSize
     {
         $connection = $this->resourceConnection->getConnection();
 
-        foreach ($this->rowSizeEstimatorPool as $nameIndex => $rowSizeEstimator) {
-            $this->typeRowSizeEstimator->checkTypeRowSizeEstimator($rowSizeEstimator);
+        foreach ($this->rowSizeEstimatorPool->get() as $nameIndex => $rowSizeEstimator) {
             $rowMemory = $rowSizeEstimator->estimateRowSize();
             $bufferPoolSize = $connection->fetchOne('SELECT @@innodb_buffer_pool_size;');
             $batchSize = ceil((($bufferPoolSize * 0.2) / $rowMemory) * $coefficient);
