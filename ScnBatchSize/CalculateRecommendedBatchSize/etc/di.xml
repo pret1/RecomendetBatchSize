@@ -10,7 +10,6 @@
     </type>
     <type name="ScnBatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize">
         <arguments>
-<!--            <argument name="rowSizeEstimatorPool" xsi:type="object">ScnBatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize</argument>-->
             <argument name="resourceConnection" xsi:type="object">Magento\Framework\App\ResourceConnection</argument>
         </arguments>
     </type>

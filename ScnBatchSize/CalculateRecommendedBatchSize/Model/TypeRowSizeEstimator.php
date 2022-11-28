@@ -9,7 +9,12 @@ use Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface;
 
 class TypeRowSizeEstimator
 {
-    public function checkTypeRowSizeEstimator($rowSizeEstimator)
+    /**
+     * @param $rowSizeEstimator
+     * @return void
+     * @throws LocalizedException
+     */
+    public function checkTypeRowSizeEstimator($rowSizeEstimator): void
     {
         if(!($rowSizeEstimator instanceof IndexTableRowSizeEstimatorInterface)){
             throw new LocalizedException(
