@@ -7,13 +7,11 @@
         "magento/magento-composer-installer": "*",
         "symfony/console": "*"
     },
-    "suggest": {
-
-    },
     "type": "magento2-module",
     "version": "1.0.0",
     "license": [
-
+        "OSL-3.0",
+        "AFL-3.0"
     ],
     "autoload": {
         "files": [
@@ -22,13 +20,5 @@
         "psr-4": {
             "BatchSize\\CalculateRecommendedBatchSize\\": ""
         }
-    },
-    "extra": {
-        "map": [
-            [
-                "*",
-                "BatchSize/CalculateRecommendedBatchSize"
-            ]
-        ]
     }
 }
