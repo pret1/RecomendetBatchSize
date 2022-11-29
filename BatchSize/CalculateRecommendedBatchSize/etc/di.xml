@@ -4,16 +4,16 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="calculate_batch_size" xsi:type="object">ScnBatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize</item>
+                <item name="calculate_batch_size" xsi:type="object">BatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize</item>
             </argument>
         </arguments>
     </type>
-    <type name="ScnBatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize">
+    <type name="BatchSize\CalculateRecommendedBatchSize\Console\Command\CommandCalculateBatchSize">
         <arguments>
             <argument name="resourceConnection" xsi:type="object">Magento\Framework\App\ResourceConnection</argument>
         </arguments>
     </type>
-    <type name="ScnBatchSize\CalculateRecommendedBatchSize\Model\RowSizeEstimatorPool">
+    <type name="BatchSize\CalculateRecommendedBatchSize\Model\RowSizeEstimatorPool">
         <arguments>
             <argument name="rowSizeEstimatorPool" xsi:type="array">
                 <item name="catalog_category_product" xsi:type="object">Magento\Catalog\Model\Indexer\Category\Product\RowSizeEstimator</item>
@@ -25,7 +25,7 @@
             <argument name="resourceConnection" xsi:type="object">Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface</argument>
         </arguments>
     </type>
-    <type name="ScnBatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize">
+    <type name="BatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize">
         <arguments>
             <argument name="resourceConnection" xsi:type="object">Magento\Framework\App\ResourceConnection</argument>
         </arguments>

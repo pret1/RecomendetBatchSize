@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ScnBatchSize\CalculateRecommendedBatchSize\Model;
+namespace BatchSize\CalculateRecommendedBatchSize\Model;
 
 use Magento\Framework\App\ResourceConnection;
-use ScnBatchSize\CalculateRecommendedBatchSize\Model\RowSizeEstimatorPool;
+use BatchSize\CalculateRecommendedBatchSize\Model\RowSizeEstimatorPool;
 
 class CalculateBatchSize
 {

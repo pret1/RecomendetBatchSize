@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ScnBatchSize\CalculateRecommendedBatchSize\Model;
+namespace BatchSize\CalculateRecommendedBatchSize\Model;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Indexer\IndexTableRowSizeEstimatorInterface;
@@ -17,7 +17,11 @@ class RowSizeEstimatorPool
     ) {
     }
 
-    public function get()
+    /**
+     * @return IndexTableRowSizeEstimatorInterface[]
+     * @throws LocalizedException
+     */
+    public function get(): array
     {
         foreach ($this->rowSizeEstimatorPool as $rowSizeEstimator) {
             if (!($rowSizeEstimator instanceof IndexTableRowSizeEstimatorInterface)) {

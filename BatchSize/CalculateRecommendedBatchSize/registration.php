@@ -6,6 +6,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'ScnBatchSize_CalculateRecommendedBatchSize',
+    'BatchSize_CalculateRecommendedBatchSize',
     __DIR__
 );

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ScnBatchSize\CalculateRecommendedBatchSize\Console\Command;
+namespace BatchSize\CalculateRecommendedBatchSize\Console\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Command\Command;
-use ScnBatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize;
+use BatchSize\CalculateRecommendedBatchSize\Model\CalculateBatchSize;
 
 class CommandCalculateBatchSize extends Command
 {
@@ -35,7 +35,8 @@ class CommandCalculateBatchSize extends Command
             self::INSURANCE_COEFFICIENT,
             "co",
             InputOption::VALUE_REQUIRED,
-            'Insurance coefficient for batch size'
+            'Insurance coefficient for batch size',
+            '0.95'
         );
 
         parent::configure();
@@ -49,7 +50,6 @@ class CommandCalculateBatchSize extends Command
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $coefficient = $input->getOption('coefficient');
-        $coefficient = $coefficient ?? 0.95;
         $this->calculateBatchSize->execute((float) $coefficient);
     }
 }
